@@ -6,7 +6,9 @@ import os
 
 from authlib.flask.client import OAuth
 from flask import Flask, abort, flash, make_response, redirect, request, render_template, session, url_for
-from loginpass import create_flask_blueprint
+from loginpass import create_flask_blueprint, Twitter
+
+from game import Game
 
 OAUTH_BACKENDS = [ Twitter ]
 
@@ -28,7 +30,6 @@ class Cache(object):
 # Basic setup
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
-bootstrap = Bootstrap(app)
 oauth = OAuth(app, Cache())
 
 def handle_authorize(remote, token, user_info):
@@ -51,6 +52,10 @@ def get_user():
         return redirect(url_for('index'))
     return user
 
+@app.route('/')
+def index():
+    return render_template('index.html')
+
 @app.route('/logout')
 def logout():
     session.clear()
@@ -65,8 +70,8 @@ def page_not_found(e):
 def permission_denied(e):
     return redirect(url_for('login'))
 
-github_bp = create_flask_blueprint(GitHub, oauth, handle_authorize)
-app.register_blueprint(github_bp, url_prefix='/github')
+twitter_bp = create_flask_blueprint(Twitter, oauth, handle_authorize)
+app.register_blueprint(twitter_bp, url_prefix='/twitter')
 app.logger.setLevel(logging.DEBUG)
 start_demo_db = False
 if 'development' == app.config.get('ENV'):
