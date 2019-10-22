@@ -2,6 +2,19 @@
 California Privacy Wizard: the game of CCPA opt-outs (and epic wizard battles)
 
 
+## About
+
+California Privacy Wizard is an epic game of wizard
+battles that you play by tagging people on Twitter.
+
+You get new spells by opting out of tracking under
+the California Consumer Privacy Act (CCPA), a new law
+that protects your personal information from being
+traded and sold by database marketers.
+
+
+
+
 ## Getting started
 
 ### On Linux
