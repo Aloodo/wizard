@@ -16,20 +16,23 @@ ol[class] {
 
 /* Remove default margin */
 body,
-h1,
-h2,
-h3,
-h4,
+h1, h2, h3, h4,
 p,
-ul[class],
-ol[class],
+ul[class], ol[class],
 li,
-figure,
-figcaption,
-blockquote,
-dl,
-dd {
+figure, figcaption,
+blockquote, dl, dd {
   margin: 0;
+}
+
+@font-face {
+    font-family: 'PixelOperator';
+    src: url('/static/PixelOperator.ttf');
+}
+@font-face {
+    font-family: 'PixelOperator';
+    src: url('/static/PixelOperator-Bold.ttf');
+    font-weight: bold;
 }
 
 /* Set core body defaults */
@@ -39,6 +42,10 @@ body {
 	text-rendering: optimizeSpeed;
 	line-height: 1.5;
 	text-align: center;
+	background-color: black;
+	font-family: PixelOperator;
+	color: #ffb000;
+	font-size: 200%;
 }
 
 /* Put everything in main */
