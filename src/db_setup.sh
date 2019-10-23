@@ -8,7 +8,7 @@ pushd $PWD
 cd $(dirname "$0")
 
 cp pg_hba.conf /etc/postgresql/9.6/main
-service postgresql start
+service postgresql restart
 
 # create the database if it does not exist already
 echo "SELECT 'CREATE DATABASE wizard' WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'wizard')\gexec" | psql --user postgres

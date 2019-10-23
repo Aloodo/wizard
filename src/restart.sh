@@ -14,14 +14,14 @@ mv conf/config.py .
 
 # Dependencies
 apt-get update
-apt-get -y install postgresql python3-pip apache2 libapache2-mod-wsgi-py3 libpq-dev
+apt-get -y install certbot python-certbot-apache postgresql python3-pip apache2 libapache2-mod-wsgi-py3 libpq-dev
 pip3 install -r requirements.txt
 
 # Crontab entries
-chown root.root conf/cron/*/*
-chmod 755 conf/cron/*/*
-cp -p conf/cron/daily/* /etc/cron.daily
-cp -p conf/cron/weekly/* /etc/cron.weekly
+# chown root.root conf/cron/*/*
+# chmod 755 conf/cron/*/*
+# cp -p conf/cron/daily/* /etc/cron.daily
+# cp -p conf/cron/weekly/* /etc/cron.weekly
 
 # Config file for WSGI on the web server
 cp conf/wsgi.conf /etc/apache2/conf-available
