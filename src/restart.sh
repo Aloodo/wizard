@@ -12,10 +12,11 @@ cd $(dirname "$0")
 # for testing in a container)
 mv conf/config.py .
 
-# Dependencies
-apt-get update
-apt-get -y install certbot python-certbot-apache postgresql python3-pip apache2 libapache2-mod-wsgi-py3 libpq-dev
-pip3 install -r requirements.txt
+if [ "x$1" != "xq" ] ; then
+	apt-get update
+	apt-get -y install certbot python-certbot-apache postgresql python3-pip apache2 libapache2-mod-wsgi-py3 libpq-dev
+	pip3 install -r requirements.txt
+fi
 
 # Crontab entries
 # chown root.root conf/cron/*/*
@@ -30,8 +31,10 @@ a2enconf wsgi
 
 # Set up the database (same as in the container). Web
 # server should be down when database is being worked on.
-systemctl stop apache2
-./db_setup.sh
+if [ "x$1" != "xq" ] ; then
+	systemctl stop apache2
+	./db_setup.sh
+fi
 
 # Finally restart the web server
-systemctl start apache2
+systemctl restart apache2

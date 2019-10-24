@@ -23,14 +23,16 @@ EXCLUDES="--exclude include --exclude .git --exclude lib --exclude bin --exclude
 ssh $USER@$HOST true
 rm -rf data
 
-# Don't bother getting the config from the server
+# Don't bother getting the config from the server yet
 # scp $USER@$HOST:$DOCROOT/config.py conf/config.py || 
 pass config/$APPNAME > conf/config.py
 
-ssh $USER@$HOST sudo apt-get -y install rsync
-ssh $USER@$HOST sudo mkdir -p $DOCROOT
-ssh $USER@$HOST sudo chown -R $USER $DOCROOT
+if [ "x$1" != "xq" ] ; then
+	ssh $USER@$HOST sudo apt-get -y install rsync
+	ssh $USER@$HOST sudo mkdir -p $DOCROOT
+	ssh $USER@$HOST sudo chown -R $USER $DOCROOT
+fi
 rsync -rpt $EXCLUDES src/ $USER@$HOST:$DOCROOT/
 rsync -rpt $EXCLUDES conf $USER@$HOST:$DOCROOT/
-ssh $USER@$HOST sudo $DOCROOT/restart.sh
+ssh $USER@$HOST sudo $DOCROOT/restart.sh $*
 
