@@ -1,22 +1,12 @@
-<!doctype html><html><head>
-  <meta charset="utf-8">
-  {% if title %}{{ title }}{% else %}California Privacy Wizard{% endif %}
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" type="text/css" media="all" href="/static/wizard.css" />
-</head><body><main>
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            {% for message in messages %}
-                <div class="alert alert-info" role="alert">{{ message }}</div>
-            {% endfor %}
-        {% endif %}
-    {% endwith %}
+{% extends 'base.html' %}
 
-	<p>you are not logged in</p>
-
-</main>
-<footer>Footer text.</footer>
-<script src="https://ad.aloodo.com/track.js"></script>
-</body></html>
+{% block app_content %}
+        <blockquote>A process cannot be understood
+        by stopping it. Understanding must move
+        with the flow of the process, must join it
+        and flow with it.<br>&mdash; <a target="_blank"
+        href="https://www.dunenovels.com/novel/dune">Frank&nbsp;Herbert</a></blockquote>
+        
+        <p><a class="btn btn-primary" href="{{ url_for('login') }}">Log in with Twitter</a></p>
+{% endblock %}
 

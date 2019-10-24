@@ -32,8 +32,6 @@ class WizardTestCase(unittest.TestCase):
         self.assertEqual(testuser, wiz1)
         wiz2 = tg.wizard.lookup(wid=testuser.id)
         self.assertEqual(testuser, wiz2)
-        nosuchwiz = tg.wizard.lookup(sub='42')
-        self.assertIsNone(nosuchwiz)
 
     def test_name_change(self):
         tg = Game()
@@ -45,6 +43,11 @@ class WizardTestCase(unittest.TestCase):
         bob2 = tg.wizard.lookup(wid=bob.id)
         self.assertEqual(alice, alice2)
         self.assertEqual(bob, bob2)
+
+    def lookup_new(self):
+        tg = Game()
+        wiz = tg.lookup(sub=9, username="gandalf")
+        logging.debug(wiz)
 
 
 if __name__ == '__main__':

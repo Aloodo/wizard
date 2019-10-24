@@ -1,0 +1,26 @@
+<!doctype html><html><head>
+  <meta charset="utf-8">
+  {% if title %}{{ title }}{% else %}California Privacy Wizard{% endif %}
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" type="text/css" media="all" href="/static/wizard.css" />
+</head><body><main>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-info" role="alert">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+{% block app_content %}{% endblock %}
+
+</main>
+<footer>
+	<a href="/tos/">Terms of Service</a> &bull;
+    <a href="/privacy/">Privacy Policy</a> &bull;
+    <a target="_blank" href="https://blog.aloodo.org/">Blog</a>
+</footer>
+<script src="https://ad.aloodo.com/track.js"></script>
+</body></html>
+

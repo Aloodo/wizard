@@ -36,21 +36,24 @@ class Wizard(object):
         return self
 
     @classmethod
-    def lookup(cls, wid=None, sub=None):
-        (all_wids, all_subs) = (False, False)
+    def lookup(cls, wid=None, sub=None, username=None):
+        (all_wids, all_subs, all_usernames) = (False, False, False)
         if not wid:
             all_wids = True
         if not sub:
             all_subs = True
+        if not username:
+            all_usernames = True
         with cls.game.conn.cursor() as curs:
             curs.execute('''SELECT id, sub, xp, username FROM wizard WHERE
                             (id = %s OR %s) AND
-                            (sub = %s OR %s)
-                            ''', (wid, all_wids, sub, all_subs))
+                            (sub = %s OR %s) AND
+                            (username = %s OR %s)
+                            ''', (wid, all_wids, sub, all_subs, username, all_usernames))
             try:
                 return cls(*curs.fetchone())
             except TypeError:
-                return None
+                return cls(sub=sub, username=username).persist()
 
 
 # vim: autoindent textwidth=100 tabstop=4 shiftwidth=4 expandtab softtabstop=4 filetype=python

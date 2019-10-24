@@ -43,18 +43,26 @@ def handle_authorize(remote, token, user_info):
         return redirect(where)
     return redirect(url_for('index'))
 
-def get_user():
-    user = game.wizard.lookup(host=session.get('host'), sub=session.get('sub'))
-    if user is None:
-        session['destination'] = request.path
-        abort(403) # Forbidden
-    if not user.balance:
-        return redirect(url_for('index'))
-    return user
-
 @app.route('/')
 def index():
-    return render_template('index.html')
+    user = game.wizard.lookup(sub=session.get('sub'))
+    app.logger.debug("User is: %s" % user)
+    return render_template('index.html', user=user)
+
+@app.route('/privacy/')
+def privacy():
+    return render_template('privacy.html')
+
+@app.route('/tos/')
+def tos():
+    return render_template('tos.html')
+
+@app.route('/login')
+def login():
+    if 'development' == app.config.get('ENV') and 'http://localhost:5000/' != request.url_root:
+        # Redirect non-canonical local URLs
+        return redirect('http://localhost:5000/login')
+    return redirect('/twitter/login')
 
 @app.route('/logout')
 def logout():

@@ -23,7 +23,10 @@ EXCLUDES="--exclude include --exclude .git --exclude lib --exclude bin --exclude
 ssh $USER@$HOST true
 rm -rf data
 
-scp $USER@$HOST:$DOCROOT/config.py conf/config.py || pass config/$APPNAME > conf/config.py
+# Don't bother getting the config from the server
+# scp $USER@$HOST:$DOCROOT/config.py conf/config.py || 
+pass config/$APPNAME > conf/config.py
+
 ssh $USER@$HOST sudo apt-get -y install rsync
 ssh $USER@$HOST sudo mkdir -p $DOCROOT
 ssh $USER@$HOST sudo chown -R $USER $DOCROOT
