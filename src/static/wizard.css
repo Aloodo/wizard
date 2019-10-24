@@ -85,11 +85,25 @@ blockquote {
 	max-width: 33em;
 }
 
+blockquote > a {
+	text-align: right;
+}
+
+blockquote > a:before {
+	content: '--';
+}
+
+header {
+	text-align: right;
+	width: 100%;
+	padding: 1ex;
+}
+
 footer {
 	position: fixed;
 	bottom: 0;
 	width: 100%;
-	padding: 1ex;
+	padding: 2ex;
 }
 
 /* vim: set ts=8 sw=4 tw=0 noet : */

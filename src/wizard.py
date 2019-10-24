@@ -37,6 +37,8 @@ class Wizard(object):
 
     @classmethod
     def lookup(cls, wid=None, sub=None, username=None):
+        if not wid and not sub:
+            return None
         (all_wids, all_subs, all_usernames) = (False, False, False)
         if not wid:
             all_wids = True

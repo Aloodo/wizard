@@ -49,11 +49,11 @@ def index():
     app.logger.debug("User is: %s" % user)
     return render_template('index.html', user=user)
 
-@app.route('/privacy/')
+@app.route('/privacy')
 def privacy():
     return render_template('privacy.html')
 
-@app.route('/tos/')
+@app.route('/tos')
 def tos():
     return render_template('tos.html')
 
@@ -66,7 +66,9 @@ def login():
 
 @app.route('/logout')
 def logout():
-    session.clear()
+    [session.pop(key) for key in list(session.keys())]
+    app.logger.debug (session)
+    flash("You have been logged out.")
     return redirect(url_for('index'))
 
 def page_not_found(e):
