@@ -6,21 +6,24 @@
   <link rel="stylesheet" type="text/css" media="all" href="/static/wizard.css" />
 </head><body>
 
-<header>{% if user %}{{user.username}}<a href="/logout">(log out></a>
-    {% else %}<a href="{{ url_for('login') }}">Log in with Twitter</a>
-	{% endif %}
+<header>
+	<a href="/"><h1>California Privacy Wizard</h1></a>
+	{% if user %}<span class="login">@{{user.username}} <a href="/logout">(log out)</a></span>
+    		{% else %}<a class="login" href="{{ url_for('login') }}"><img src="static/twitter.svg" alt="">
+				<span>Sign in with Twitter</span></a>
+			{% endif %}
 </header>
 
 <main>
     {% with messages = get_flashed_messages() %}
         {% if messages %}
             {% for message in messages %}
-                <div class="alert alert-info" role="alert">{{ message }}</div>
+                <div class="alert" role="alert">{{ message }}</div>
             {% endfor %}
         {% endif %}
     {% endwith %}
 
-{% block app_content %}{% endblock %}
+	{% block app_content %}{% endblock %}
 </main>
 
 <footer>
