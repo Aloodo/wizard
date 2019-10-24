@@ -1,5 +1,4 @@
-# wizard
-California Privacy Wizard: the game of CCPA opt-outs (and epic wizard battles)
+# California Privacy Wizard: the game of CCPA opt-outs (and epic wizard battles)
 
 
 ## About
@@ -13,6 +12,20 @@ that protects your personal information from being
 traded and sold by database marketers.
 
 
+## Components
+
+This project has three components: a browser
+extension, a database-backed web site, and a Twitter
+bot.
+
+ * Browser extension: detects when you have
+   successfully completed a quest, and then allows you to
+   proceed to the web site to collect your new spell.
+
+ * Web site: tracks your spells and standings.
+
+ * Twitter bot: uses your activity on Twitter to resolve
+   battles and apprenticeships.
 
 
 ## Getting started
