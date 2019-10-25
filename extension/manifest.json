@@ -7,6 +7,10 @@
 		{
 			"matches": ["https://wizard.aloodo.org/*"],
 			"js": ["wizard-aloodo.js"]
+		},
+		{
+			"matches": ["https://blog.zgp.org/opt-out-success/"],
+			"js": ["blog-zgp.js"]
 		}
 	]
 }
