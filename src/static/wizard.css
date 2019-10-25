@@ -5,13 +5,7 @@
 *,
 *::before,
 *::after {
-	box-sizing: border-box;
-}
-
-/* Remove default padding */
-ul[class],
-ol[class] {
-	padding: 0;
+       box-sizing: border-box;
 }
 
 /* Remove default margin */
@@ -22,17 +16,13 @@ ul[class], ol[class],
 li,
 figure, figcaption,
 blockquote, dl, dd {
-  margin: 0;
+	margin: 0;
+	font-weight: 400;
 }
 
 @font-face {
-    font-family: 'PixelOperator';
-    src: url('/static/PixelOperator.ttf');
-}
-@font-face {
-    font-family: 'PixelOperator';
-    src: url('/static/PixelOperator-Bold.ttf');
-    font-weight: bold;
+	font-family: 'PixelOperator';
+	src: url('/static/PixelOperator.ttf');
 }
 
 /* Set core body defaults */
@@ -43,14 +33,14 @@ body {
 	background-color: black;
 	font-family: PixelOperator;
 	color: #ffb000;
-	font-size: 200%;
+	font-size: 36px;
 }
 
 /* Put everything in main */
 main {
 	margin-left: auto;
 	margin-right: auto;
-	max-width: 36em;
+	max-width: 44rem;
 	text-align: left;
 }
 
@@ -66,11 +56,6 @@ button,
 textarea,
 select {
   font: inherit;
-}
-
-
-blockquote {
-	max-width: 33em;
 }
 
 blockquote > a {
@@ -113,6 +98,10 @@ footer {
 	bottom: 0;
 	width: 100%;
 	padding: 2ex;
+}
+
+footer a {
+	white-space: nowrap;
 }
 
 /* vim: set ts=8 sw=4 tw=0 noet : */
