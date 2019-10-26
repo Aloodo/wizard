@@ -12,6 +12,12 @@ that protects your personal information from being
 traded and sold by database marketers.
 
 
+## How to play
+
+FIXME This is where we tell people to look at the
+player intro on the web site.
+
+
 ## Components
 
 This project has three components: a browser
@@ -26,6 +32,13 @@ bot.
 
  * Twitter bot: uses your activity on Twitter to resolve
    battles and apprenticeships.
+
+The extension code is in `/extension`.  The web site
+and Twitter bot, along with the common Python and
+SQL used in both, are in `/src`.
+
+FIXME: the Twitter bot is not written yet but it will
+be in Python and live in /src.
 
 
 ## Getting started
@@ -77,7 +90,7 @@ site, then start a local copy in a container.
 
 	./web.sh
 
-Visit the site at: http://localhost:5000/
+Visit the site at: `http://localhost:5000/`
 
 Your changes in the `src` directory will show up in
 the container, and Flask is configured to auto-reload
@@ -95,7 +108,12 @@ system packages installed (because these images take
 a while to build and don't change often) and removes
 all the other images.
 
-./cleanup.sh
+	./cleanup.sh
+
+
+## Contributing
+
+We accept pull requests and issues on Github.
 
 
 # Dependencies
@@ -113,6 +131,8 @@ all the other images.
  * flask: Full-featured but relatively simple web development framework.
 
  * loginpass: Wrapper for OAuth
+
+**web-ext:** Tool for building and testing the extension
 
 
 # Third parties
@@ -133,4 +153,6 @@ all the other images.
 [psycopg2](https://pypi.org/project/psycopg2/)
 
 [PostgreSQL: Documentation](https://www.postgresql.org/docs/)
+
+[Browser Extensions - Mozilla](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions)
 
