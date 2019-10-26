@@ -40,8 +40,10 @@ SQL used in both, are in `/src`.
 FIXME: the Twitter bot is not written yet but it will
 be in Python and live in /src.
 
+## Getting started: web extension
 
-## Getting started
+
+## Getting started: web application
 
 ### On Linux
 
@@ -140,9 +142,21 @@ We accept pull requests and issues on Github.
 **Twitter:** Because Twitter game.
 
 
+# Art Credits
+
+Wizard hat graphic based on "solid hat-wizard.svg"
+from Font Awesome Free 5.4.1 by @fontawesome - https://fontawesome.com
+[CC BY 4.0 (https://creativecommons.org/licenses/by/4.0)]
+
+Pixel Operator typeface by Jayvee Enaguas (HarvettFox96)
+Licensed under a Creative Commons Zero (CC0) 1.0. © 2009-2018.
+
+
 # References
 
 [Authlib: Python Authentication](https://docs.authlib.org/en/latest/index.html)
+
+[Browser Extensions - Mozilla](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions)
 
 [Flask, A Python Microframework](http://flask.pocoo.org/)
 
@@ -154,5 +168,5 @@ We accept pull requests and issues on Github.
 
 [PostgreSQL: Documentation](https://www.postgresql.org/docs/)
 
-[Browser Extensions - Mozilla](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions)
+[Twitter Developers](https://developer.twitter.com/en/docs) 
 
