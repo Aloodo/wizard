@@ -49,6 +49,10 @@ def index():
     app.logger.debug("User is: %s" % user)
     return render_template('index.html', user=user)
 
+@app.route('/favicon.ico')
+def favicon():
+    return app.send_static_file('favicon.ico')
+
 @app.route('/privacy')
 def privacy():
     return render_template('privacy.html')
