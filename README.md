@@ -151,6 +151,9 @@ from Font Awesome Free 5.4.1 by @fontawesome - https://fontawesome.com
 Pixel Operator typeface by Jayvee Enaguas (HarvettFox96)
 Licensed under a Creative Commons Zero (CC0) 1.0. © 2009-2018.
 
+Favicon image conversions and template markup by
+[RealFaviconGenerator](https://realfavicongenerator.net/)
+
 
 # References
 
