@@ -2,9 +2,14 @@
 	"name": "California Privacy Wizard",
 	"description": "Learn your rights under the California Consumer Privacy Act by playing wizard battles with your Twitter friends",
 	"homepage_url": "https://wizard.aloodo.org",
-	"manifest_version": 2,
 
+	"manifest_version": 2,
 	"version": "0.1",
+
+	"icons": {
+		"48": "icons/wizard-48.png",
+		"96": "icons/wizard-96.png"
+	},
 
 	"content_scripts": [
 		{
