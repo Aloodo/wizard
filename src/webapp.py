@@ -85,6 +85,13 @@ def page_not_found(e):
 def permission_denied(e):
     return redirect(url_for('login'))
 
+@app.route('/webhook', methods=['POST'])
+def webhook():
+    app.logger.debug('Headers: %s', request.headers)
+    app.logger.debug('Body: %s', request.get_data()) 
+    return 'OK'
+
+
 twitter_bp = create_flask_blueprint(Twitter, oauth, handle_authorize)
 app.register_blueprint(twitter_bp, url_prefix='/twitter')
 app.logger.setLevel(logging.DEBUG)
