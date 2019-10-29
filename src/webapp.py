@@ -46,7 +46,6 @@ def handle_authorize(remote, token, user_info):
 @app.route('/')
 def index():
     user = game.wizard.lookup(sub=session.get('sub'))
-    app.logger.debug("User is: %s" % user)
     return render_template('index.html', user=user)
 
 @app.route('/favicon.ico')
@@ -55,11 +54,13 @@ def favicon():
 
 @app.route('/privacy')
 def privacy():
-    return render_template('privacy.html')
+    user = game.wizard.lookup(sub=session.get('sub'))
+    return render_template('privacy.html', user=user)
 
 @app.route('/tos')
 def tos():
-    return render_template('tos.html')
+    user = game.wizard.lookup(sub=session.get('sub'))
+    return render_template('tos.html', user=user)
 
 @app.route('/login')
 def login():
