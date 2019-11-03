@@ -33,7 +33,23 @@ class Wizard(object):
                     (self.sub, self.xp, self.username))
                 self.id = curs.fetchone()[0]
             curs.connection.commit()
+        assert(self.id is not None)
         return self
+
+    def add_spell(self, spell):
+        with self.game.conn.cursor() as curs:
+            curs.execute('''INSERT INTO wizard_spell (wizard, spell)
+                            VALUES (%s, %s) ON CONFLICT DO NOTHING''',
+                            (self.id, spell.id))
+            curs.connection.commit()
+            return curs.rowcount > 0
+
+    def has_spell(self, spell):
+        with self.game.conn.cursor() as curs:
+            curs.execute('''SELECT COUNT(*) FROM wizard_spell
+                            WHERE wizard = %s AND spell = %s''',
+                            (self.id, spell.id))
+            return curs.fetchone()[0] == 1
 
     @classmethod
     def lookup(cls, wid=None, sub=None, username=None):

@@ -12,6 +12,12 @@ except:
 
 from game import Game
 
+def test_game_and_wizard():
+    from random import randint
+    tg = Game()
+    wiz = randint(256, 2**64)
+    tw = tg.wizard(sub = wiz, username="wizard%d" % wiz).persist()
+    return (tg, tw)
 
 class WizardTestCase(unittest.TestCase):
 
@@ -47,8 +53,15 @@ class WizardTestCase(unittest.TestCase):
     def lookup_new(self):
         tg = Game()
         wiz = tg.lookup(sub=9, username="gandalf")
-        logging.debug(wiz)
 
+    def test_add_spell(self):
+        "Add a spell to a wizard. Test that a repeat add will return False but not raise an exception" 
+        (tg, tw) = test_game_and_wizard()
+        ts = tg.spell(name="scry").persist()
+        self.assertFalse(tw.has_spell(ts))
+        self.assertTrue(tw.add_spell(ts))
+        self.assertFalse(tw.add_spell(ts))
+        self.assertTrue(tw.has_spell(ts))
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)

@@ -16,6 +16,7 @@ except:
 
 import config
 from wizard import Wizard
+from spell import Spell
 
 class Game(object):
     FIXED = True
@@ -28,6 +29,8 @@ class Game(object):
         self.logging = logging
         self.wizard = Wizard
         self.wizard.game = self
+        self.spell = Spell
+        self.spell.game = self
         if start_demo_db:
             self.start_demo_db()
         self.connect()

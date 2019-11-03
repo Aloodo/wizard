@@ -19,9 +19,8 @@ CREATE TABLE IF NOT EXISTS spell (
 );
 
 CREATE TABLE IF NOT EXISTS wizard_spell (
-	id SERIAL PRIMARY KEY,
 	wizard INT REFERENCES wizard(id),
 	spell INT REFERENCES spell(id),
-	UNIQUE (wizard, spell)
+	PRIMARY KEY (wizard, spell)
 );
 
