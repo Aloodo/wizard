@@ -57,11 +57,23 @@ class WizardTestCase(unittest.TestCase):
     def test_add_spell(self):
         "Add a spell to a wizard. Test that a repeat add will return False but not raise an exception" 
         (tg, tw) = test_game_and_wizard()
-        ts = tg.spell(name="scry").persist()
+        ts = tg.spell(name="test_add_spell").persist()
         self.assertFalse(tw.has_spell(ts))
         self.assertTrue(tw.add_spell(ts))
         self.assertFalse(tw.add_spell(ts))
         self.assertTrue(tw.has_spell(ts))
+
+    def test_remove_spell(self):
+        "Remove a spell from a wizard."
+        (tg, tw) = test_game_and_wizard()
+        ts = tg.spell(name="test_remove_spell").persist()
+        self.assertFalse(tw.has_spell(ts))
+        self.assertFalse(tw.remove_spell(ts))
+        self.assertTrue(tw.add_spell(ts))
+        self.assertTrue(tw.has_spell(ts))
+        self.assertTrue(tw.remove_spell(ts))
+        self.assertFalse(tw.has_spell(ts))
+
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)

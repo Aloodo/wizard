@@ -44,6 +44,14 @@ class Wizard(object):
             curs.connection.commit()
             return curs.rowcount > 0
 
+    def remove_spell(self, spell):
+        with self.game.conn.cursor() as curs:
+            curs.execute('''DELETE FROM wizard_spell
+                            WHERE wizard = %s AND spell = %s''',
+                            (self.id, spell.id))
+            curs.connection.commit()
+            return curs.rowcount > 0
+
     def has_spell(self, spell):
         with self.game.conn.cursor() as curs:
             curs.execute('''SELECT COUNT(*) FROM wizard_spell
