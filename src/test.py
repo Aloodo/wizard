@@ -74,6 +74,14 @@ class WizardTestCase(unittest.TestCase):
         self.assertTrue(tw.remove_spell(ts))
         self.assertFalse(tw.has_spell(ts))
 
+    def test_level(self):
+        (tg, tw) = test_game_and_wizard()
+        self.assertEqual(1, tw.level)
+        tw.xp += 120
+        self.assertEqual(2, tw.level)
+        tw.xp += 10000 
+        self.assertEqual(3, tw.level)
+
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)

@@ -10,7 +10,15 @@ class Wizard(object):
         self.username = username
 
     def __repr__(self):
-        return "Wizard %d %s with XP %d" % (self.id, self.username, self.xp)
+        return "Level %d wizard (%d) %s with XP %d" % (self.level, self.id, self.username, self.xp)
+
+    @property
+    def level(self):
+        if self.xp >= 800:
+            return 3
+        if self.xp >= 100:
+            return 2
+        return 1
 
     def __eq__(self, other):
         if (not self) or (not other):
