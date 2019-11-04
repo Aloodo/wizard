@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import logging
+from random import randint
 import unittest
 
 try:
@@ -12,11 +13,14 @@ except:
 
 from game import Game
 
-def test_game_and_wizard():
-    from random import randint
-    tg = Game()
+def random_wizard(game):
     wiz = randint(256, 2**64)
-    tw = tg.wizard(sub = wiz, username="wizard%d" % wiz).persist()
+    tw = game.wizard(sub = wiz, username="wizard%d" % wiz).persist()
+    return tw
+
+def test_game_and_wizard():
+    tg = Game()
+    tw = random_wizard(tg)
     return (tg, tw)
 
 class WizardTestCase(unittest.TestCase):
@@ -81,6 +85,13 @@ class WizardTestCase(unittest.TestCase):
         self.assertEqual(2, tw.level)
         tw.xp += 10000 
         self.assertEqual(3, tw.level)
+
+    def test_challenge(self):
+        (tg, tw) = test_game_and_wizard()
+        ow = random_wizard(tg)
+        ts = tg.spell(name="test_challenge").persist()
+        tw.add_spell(ts)
+        tw.challenge(ow, ts)
 
 
 if __name__ == '__main__':
