@@ -4,3 +4,4 @@ loginpass
 pip >= 7.1.0
 psycopg2 >= 2.5
 requests
+tweepy

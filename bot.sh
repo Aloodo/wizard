@@ -23,7 +23,13 @@ docker ps &> /dev/null || dockerfail
 set -e
 set -x
 
-cp src/test_config.py src/config.py
-docker build --tag=wizard_test .
-docker run --volume "$(pwd)"/src:/srv/wizard:ro,Z \
-	--entrypoint "/usr/bin/env" wizard_test python3 /srv/wizard/test.py
+pass config/wizard > src/config.py
+docker build --tag=wizard_bot .
+
+docker run \
+	-p 5000:5000 \
+	-e LC_ALL=C.UTF-8 \
+	-e LANG=C.UTF-8 \
+	--volume "$(pwd)"/src:/srv/wizard:ro,Z \
+	--entrypoint="/usr/bin/env" wizard_bot python3 /srv/wizard/bot.py
+
