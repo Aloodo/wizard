@@ -2,9 +2,14 @@
 
 DATASOURCE=wizard@wizard.aloodo.org
 
-trap popd EXIT
+trap cleanup EXIT
 pushd $PWD &> /dev/null
 cd $(dirname "$0")
+
+cleanup() {
+	rm src/config.py
+	popd
+}
 
 dockerfail() {
 	echo
@@ -22,6 +27,7 @@ ssh $DATASOURCE pg_dump --user postgres wizard > data/db_dump.sql || echo "Faile
 set -e
 set -x
 
+cp src/test_config.py src/config.py
 docker build --tag=wizard_web .
 
 docker run \
