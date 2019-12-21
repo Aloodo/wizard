@@ -4,7 +4,7 @@
 	"homepage_url": "https://wizard.aloodo.org",
 
 	"manifest_version": 2,
-	"version": "0.1",
+	"version": "0.2",
 
 	"icons": {
 		"48": "icons/wizard-48.png",
@@ -13,11 +13,11 @@
 
 	"content_scripts": [
 		{
-			"matches": ["https://wizard.aloodo.org/*"],
+			"matches": ["*://wizard.aloodo.org/*"],
 			"js": ["wizard-aloodo.js"]
 		},
 		{
-			"matches": ["https://blog.zgp.org/opt-out-success/"],
+			"matches": ["*://blog.zgp.org/opt-out-success/*"],
 			"js": ["blog-zgp.js"]
 		}
 	]
