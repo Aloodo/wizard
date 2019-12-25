@@ -3,13 +3,12 @@ var host = "http://localhost:5000";
 
 function doDialog() {
 	if(confirm("Your quest has succeeded, O mighty wizard! You may obtain your new spell now.")) {
-		window.location = host + '/new-spell/url=' + encodeURI(window.location);
+		window.location = host + '/add-spell?url=' + encodeURI(window.location);
 	}
 }
 
 function checkMessage() {
 	var ps = document.querySelectorAll("p");
-	alert(ps);
 	for (var i = 0; i < ps.length; i++) {
 		console.log(ps[i]);
 		if ("You have opted out of the sale of your personal information." == ps[i].textContent) {

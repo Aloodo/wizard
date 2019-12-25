@@ -43,10 +43,24 @@ def handle_authorize(remote, token, user_info):
         return redirect(where)
     return redirect(url_for('index'))
 
+#
+# Headline pages for users
+#
+
 @app.route('/')
 def index():
     user = game.wizard.lookup(sub=session.get('sub'))
     return render_template('index.html', user=user)
+
+@app.route('/add-spell')
+def add_spell():
+    spell = game.spell.lookup(url=request.args.get('url'))
+    user = game.wizard.lookup(sub=session.get('sub'))
+    return "looked up spell %s" % spell
+
+#
+# Miscelleneous user-visible stuff
+#
 
 @app.route('/favicon.ico')
 def favicon():
@@ -65,7 +79,7 @@ def tos():
 @app.route('/login')
 def login():
     if 'development' == app.config.get('ENV') and 'http://localhost:5000/' != request.url_root:
-        # Redirect non-canonical local URLs
+        # Redirect non-canonical local URLs in dev environment
         return redirect('http://localhost:5000/login')
     return redirect('/twitter/login')
 
@@ -116,6 +130,5 @@ if 'development' == app.config.get('ENV'):
 #                                                                        #
 ##########################################################################
 ''')
-
 
 # vim: autoindent textwidth=100 tabstop=4 shiftwidth=4 expandtab softtabstop=4 filetype=python

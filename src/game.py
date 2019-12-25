@@ -34,6 +34,7 @@ class Game(object):
         if start_demo_db:
             self.start_demo_db()
         self.connect()
+        self.spell.setup()
 
     def connect(self):
         for i in range(5):

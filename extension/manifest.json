@@ -13,11 +13,11 @@
 
 	"content_scripts": [
 		{
-			"matches": ["*://wizard.aloodo.org/*"],
+			"matches": ["*://wizard.aloodo.org/"],
 			"js": ["wizard-aloodo.js"]
 		},
 		{
-			"matches": ["*://blog.zgp.org/opt-out-success/*"],
+			"matches": ["*://blog.zgp.org/opt-out-success/"],
 			"js": ["blog-zgp.js"]
 		}
 	]

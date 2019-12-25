@@ -61,7 +61,7 @@ class WizardTestCase(unittest.TestCase):
     def test_add_spell(self):
         "Add a spell to a wizard. Test that a repeat add will return False but not raise an exception" 
         (tg, tw) = test_game_and_wizard()
-        ts = tg.spell(name="test_add_spell").persist()
+        ts = tg.spell(name="test_add_spell", url="http://example.com").persist()
         self.assertFalse(tw.has_spell(ts))
         self.assertTrue(tw.add_spell(ts))
         self.assertFalse(tw.add_spell(ts))
@@ -70,7 +70,7 @@ class WizardTestCase(unittest.TestCase):
     def test_remove_spell(self):
         "Remove a spell from a wizard."
         (tg, tw) = test_game_and_wizard()
-        ts = tg.spell(name="test_remove_spell").persist()
+        ts = tg.spell(name="test_remove_spell", url="http://example.com/test_remove_spell").persist()
         self.assertFalse(tw.has_spell(ts))
         self.assertFalse(tw.remove_spell(ts))
         self.assertTrue(tw.add_spell(ts))
@@ -89,7 +89,7 @@ class WizardTestCase(unittest.TestCase):
     def test_challenge(self):
         (tg, tw) = test_game_and_wizard()
         ow = random_wizard(tg)
-        ts = tg.spell(name="test_challenge").persist()
+        ts = tg.spell(name="test_challenge", url="http://example.com/test_challenge").persist()
         tw.add_spell(ts)
         tw.challenge(ow, ts)
 
