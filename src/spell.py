@@ -12,16 +12,16 @@ class Spell(object):
         self.url = url
 
     def __repr__(self):
-        return "Spell %d %s" % (self.id, self.name)
+        return "Spell %d %s %s" % (self.id, self.name, self.url)
 
     def __eq__(self, other):
         if not other:
             return False
-        if self.id and other.id and self.id != other.id:
+        if self.id != other.id:
             return False
         if self.name != other.name:
             return False
-        if self.name != other.url:
+        if self.url != other.url:
             return False
         return True
         
@@ -30,11 +30,14 @@ class Spell(object):
             if self.id is not None:
                 curs.execute('''UPDATE spell SET name = %s, url=%s
                                 WHERE id = %s''',
-                    (self.name, self.id, self.url))
+                    (self.name, self.url, self.id))
             else:
                 curs.execute('''INSERT INTO spell (name, url)
-                                VALUES (%s, %s) RETURNING id''',
-                    (self.name, self.url))
+                                VALUES (%s, %s) 
+                                ON CONFLICT (name) DO
+                                UPDATE SET name = spell.name WHERE spell.name = %s
+                                RETURNING id''',
+                    (self.name, self.url, self.name))
                 self.id = curs.fetchone()[0]
             curs.connection.commit()
         return self

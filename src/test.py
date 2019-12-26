@@ -58,10 +58,19 @@ class WizardTestCase(unittest.TestCase):
         tg = Game()
         wiz = tg.lookup(sub=9, username="gandalf")
 
+    def test_edit_spell(self):
+        "Modify an existing spell"
+        tg = Game()
+        ts = tg.spell(name="test_edit_spell", url="http://example.com/test_edit_spell").persist()
+        ts.url = "http://example.com/test_edit_spell_2"
+        ts.persist()
+        ts2 = tg.spell.lookup(name="test_edit_spell")
+        self.assertEqual(ts, ts2)
+
     def test_add_spell(self):
         "Add a spell to a wizard. Test that a repeat add will return False but not raise an exception" 
         (tg, tw) = test_game_and_wizard()
-        ts = tg.spell(name="test_add_spell", url="http://example.com").persist()
+        ts = tg.spell(name="test_add_spell", url="http://example.com/test_add_spell").persist()
         self.assertFalse(tw.has_spell(ts))
         self.assertTrue(tw.add_spell(ts))
         self.assertFalse(tw.add_spell(ts))
