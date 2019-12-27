@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+import logging
+
 class BattleResult(object):
 
     def __init__(self, winner, loser, text=None):
@@ -20,11 +22,15 @@ class BattleResult(object):
 class Wizard(object):
     game = None
 
-    def __init__(self, wid=None, sub=None, xp=0, username=None):
+    def __init__(self, wid=None, sub=None, xp=0, username=None, spells=None):
         self.id = wid
         self.sub = sub
         self.xp = xp
         self.username = username
+        if spells == None:
+            self.spells = []
+        else:
+            self.spells = spells
 
     def __repr__(self):
         return "Level %d wizard (%d) %s with XP %d" % (self.level, self.id, self.username, self.xp)
@@ -106,6 +112,11 @@ class Wizard(object):
                             "%s defeated %s (level %d) with a %s spell and gained %d XP!" %
                             (self.username, opponent.username, opponent.level, spell.name, gain))
 
+    def refresh(self):
+        if not self.id:
+            self.persist()
+        return self.__class__.lookup(wid=self.id)
+
     @classmethod
     def lookup(cls, wid=None, sub=None, username=None):
         if not wid and not sub:
@@ -124,7 +135,14 @@ class Wizard(object):
                             (username = %s OR %s)
                             ''', (wid, all_wids, sub, all_subs, username, all_usernames))
             try:
-                return cls(*curs.fetchone())
+                wizard = cls(*curs.fetchone())
+                curs.execute('''SELECT spell.id, spell.name, spell.url FROM spell
+                                JOIN wizard_spell ON spell.id = wizard_spell.spell
+                                WHERE wizard_spell.wizard = %s
+                                ''', (wizard.id,))
+                for row in curs.fetchall():
+                    wizard.spells.append(cls.game.spell(*row))
+                return wizard
             except TypeError:
                 return cls(sub=sub, username=username).persist()
 

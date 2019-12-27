@@ -87,6 +87,18 @@ class WizardTestCase(unittest.TestCase):
         self.assertTrue(tw.remove_spell(ts))
         self.assertFalse(tw.has_spell(ts))
 
+    def test_list_spells(self):
+        "List the spells owned by a wizard"
+        (tg, tw) = test_game_and_wizard()
+        tw.persist()
+        ts1 = tg.spell(name="test_list_spells_1", url="http://example.com/test_list_spells_1").persist()
+        ts2 = tg.spell(name="test_list_spells_2", url="http://example.com/test_list_spells_2").persist()
+        self.assertEqual([], tw.spells)
+        tw.add_spell(ts1)
+        tw.add_spell(ts2)
+        tw = tw.refresh()
+        self.assertEqual([ts1, ts2], tw.spells)
+
     def test_level(self):
         (tg, tw) = test_game_and_wizard()
         self.assertEqual(1, tw.level)
