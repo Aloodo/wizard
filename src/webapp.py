@@ -49,8 +49,8 @@ def handle_authorize(remote, token, user_info):
 
 @app.route('/')
 def index():
-    user = game.wizard.lookup(sub=session.get('sub'))
-    return render_template('index.html', user=user)
+    wizard = game.wizard.lookup(sub=session.get('sub'))
+    return render_template('index.html', wizard=wizard, user=wizard) # FIXME wizards are no mere users
 
 @app.route('/add-spell')
 def add_spell():
