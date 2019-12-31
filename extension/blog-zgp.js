@@ -1,5 +1,5 @@
-var host = "http://localhost:5000";
-// var host = "https://wizard.aloodo.org/";
+// var host = "http://localhost:5000";
+var host = "https://wizard.aloodo.org/";
 
 function doDialog() {
 	if(confirm("Your quest has succeeded, O mighty wizard! You may obtain your new spell now.")) {

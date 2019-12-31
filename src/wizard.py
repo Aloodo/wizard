@@ -128,6 +128,7 @@ class Wizard(object):
             all_subs = True
         if not username:
             all_usernames = True
+        sub = str(sub)
         with cls.game.conn.cursor() as curs:
             curs.execute('''SELECT id, sub, xp, username FROM wizard WHERE
                             (id = %s OR %s) AND

@@ -55,8 +55,18 @@ def index():
 @app.route('/add-spell')
 def add_spell():
     spell = game.spell.lookup(url=request.args.get('url'))
-    user = game.wizard.lookup(sub=session.get('sub'))
-    return "looked up spell %s" % spell
+    wizard = game.wizard.lookup(sub=session.get('sub'))
+    if wizard:
+        if wizard.add_spell(spell):
+            flash("You have gained the new spell: %s!" % spell.name)
+        else:
+            flash("The spell %s was known to you of old, O mighty wizard!" % spell.name)
+    else:
+        spell_urls = session.get('spell_urls','').split(' ')
+        spell_urls.append(spell.url)
+        session['spell_urls'] = ' '.join(spell_urls)
+        flash("Please log in, O mighty wizard.")
+    return redirect(url_for('index'))
 
 #
 # Miscelleneous user-visible stuff
@@ -78,10 +88,14 @@ def tos():
 
 @app.route('/login')
 def login():
-    if 'development' == app.config.get('ENV') and 'http://localhost:5000/' != request.url_root:
-        # Redirect non-canonical local URLs in dev environment
-        return redirect('http://localhost:5000/login')
-    return redirect('/twitter/login')
+    if 'development' == app.config.get('ENV'):
+        if 'http://localhost:5000/' != request.url_root:
+            return redirect('http://localhost:5000/login')
+        session['sub'] = -1
+        game.wizard.lookup(sub=-1, username='_test')
+        return redirect(url_for('index'))
+    else:
+        return redirect('/twitter/login')
 
 @app.route('/logout')
 def logout():
