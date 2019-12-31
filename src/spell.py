@@ -14,6 +14,10 @@ class Spell(object):
     def __repr__(self):
         return "Spell %d %s %s" % (self.id, self.name, self.url)
 
+    @property
+    def html(self):
+        return '''<span class="spell" id="spell-%d">%s</span>''' % (self.id, self.name)
+
     def __eq__(self, other):
         if not other:
             return False

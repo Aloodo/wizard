@@ -4,7 +4,7 @@
 
 	{% if wizard.spells %}<p>Thy spells:
 		{% for spell in wizard.spells %}
-			spell.html
+			{{ spell.html|safe }}
 		{% endfor %}
 	</p>{% else %}
 		<p>Thou hast no spells as yet.  With the California Privacy Wizard browser
